@@ -18,10 +18,13 @@ Rota mais longa
 ##### Exibir tempo estimando da rota e distancia
 # Requisitos.
 Python
+
 Biblioteca.
+
 googlemaps.
 
 # Diagrama.
+![Diagrama rota rapida drawio](https://github.com/user-attachments/assets/f158f2fb-76b6-4cb6-ab15-aaa429188c64)
 
 
 # Contribuindo.
