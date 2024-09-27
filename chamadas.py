@@ -1,12 +1,14 @@
 from Rotas import Entradas
 import googlemaps
-import os
-from dotenv import load_dotenv
-#função principal para capturar rotas e clima
+import os #importando o módulo 'os' para acessar variáveis de ambiente
+from dotenv import load_dotenv #Importa a função load_dotenv da biblioteca dotenv para carregar variáveis de ambiente
+#função principal do programa
 def main():
-    #instanciando o cliente do google maps
+    #carrega as variáveis de ambiente dos arquivos .env 
     load_dotenv()
+    #obtem os valores da chave da API
     api_key = os.getenv("api_key")
+    #Cria um cliente Google Maps usando a chave da API obtida
     gmaps=googlemaps.Client(api_key)
 
     try:
