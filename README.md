@@ -2,16 +2,16 @@
 
 # Descrição
 
-  Este programa permite o úsuario traçar rotas entre dois locais. Levando
+  Este programa permite o usuário traçar rotas entre dois locais. Levando
 em consideração preferência de rotas e trânsito.
 
 # Funcionalidaes.
-##### Devinir local de partida.
-##### Devinir destino.
+##### Definir local de partida.
+##### Definir destino.
 ##### Escolher prefêrencias de rotas.
 Evitar pedágio
 Evitar estradas não pavimentadas
-Evitar tránsito
+Evitar trânsito
 Rota mais curta
 Rota mais longa
 ##### Buscar rotas ultilizando API do GOOGLE MAPS
