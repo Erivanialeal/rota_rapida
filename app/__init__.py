@@ -1,20 +1,28 @@
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from app.config import Config
-from app.extensions import db, migrate, jwt
+from app.routes.rota_pesquisa import pesquisa_bp #importar o blueprint
 
-def create_app(config_class=Config):
+#from app.models import Pesquisa
+
+
+
+db = SQLAlchemy()
+migrate = Migrate()
+
+def create_app():
+    from app.config import Config  # Importação dentro da função
+    
     app = Flask(__name__)
-    app.config.from_object(config_class)
+    app.config.from_object(Config)
 
-    # Inicializa as extensões
     db.init_app(app)
     migrate.init_app(app, db)
-    jwt.init_app(app)
 
-    # Registra blueprints
-    from app.routes.auth import auth_bp
-    from app.routes.user import user_bp
-    app.register_blueprint(auth_bp)
-    app.register_blueprint(user_bp)
+    with app.app_context():
+        from app.models import Pesquisa,Filtros,HistoricoPesquisa,ResultadoPesquisa
+    # Registro do Blueprint
+    app.register_blueprint(pesquisa_bp, url_prefix='/')
 
     return app
