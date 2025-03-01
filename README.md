@@ -13,8 +13,8 @@ Armazena os usuários que utilizam o sistema, sem necessidade de autenticação.
 
 |Campo|Tipo de Dado|Restrição|Descrição|
 |-----|-------------|--------|---------|
-|*id*|INTEGER|PRIMARY KEY AUTOINCREMENT|Identificador único do usuário|
-|NOME|VARCHAR(100)|NOT NULL|nome do usuario|
+|`id`|INTEGER|PRIMARY KEY AUTOINCREMENT|Identificador único do usuário|
+|`nome`|VARCHAR(100)|NOT NULL|nome do usuario|
 # Requisitos.
 Python
 
