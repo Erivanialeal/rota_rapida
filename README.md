@@ -5,17 +5,16 @@
   Este programa permite o usuário traçar rotas entre dois locais. Levando
 em consideração preferência de rotas e trânsito.
 
-# Funcionalidaes.
-##### Definir local de partida.
-##### Definir destino.
-##### Escolher prefêrencias de rotas.
-Evitar pedágio
-Evitar estradas não pavimentadas
-Evitar trânsito
-Rota mais curta
-Rota mais longa
-##### Buscar rotas ultilizando API do GOOGLE MAPS
-##### Exibir tempo estimando da rota e distancia
+# 📌 Banco de Dados - MySQL.
+### O banco de dados utilizado no projeto é MySQL, responsável por armazenar as informações das pesquisas de rotas dos usuários..
+#### 📁 Tabelas do Banco de Dados.
+#### Tabela: usuario.
+Armazena os usuários que utilizam o sistema, sem necessidade de autenticação.
+
+|Campo|Tipo de Dado|Restrição|Descrição|
+|-----|-------------|--------|---------|
+|*id*|INTEGER|PRIMARY KEY AUTOINCREMENT|Identificador único do usuário|
+|NOME|VARCHAR(100)|NOT NULL|nome do usuario|
 # Requisitos.
 Python
 
