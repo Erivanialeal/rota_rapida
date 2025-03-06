@@ -15,16 +15,3 @@ Armazena os usuários que utilizam o sistema, sem necessidade de autenticação.
 |-----|-------------|--------|---------|
 |`id`|INTEGER|PRIMARY KEY AUTOINCREMENT|Identificador único do usuário|
 |`nome`|VARCHAR(100)|NOT NULL|nome do usuario|
-# Requisitos.
-Python
-
-Biblioteca.
-
-googlemaps.
-
-# Diagrama.
-![Diagrama rota rapida drawio](https://github.com/user-attachments/assets/f158f2fb-76b6-4cb6-ab15-aaa429188c64)
-
-
-# Contribuindo.
-Contribuições são bem-vindas!
