@@ -45,3 +45,32 @@ A tabela `filtros` armazena os filtros disponíveis para o usuário.
 | `rota_mais_curta`                      | `Boolean`                                      | `NOT NULL`, `Default=False`              | Indica se o usuário prefere a rota mais curta. |
 | `rota_mais_longa`                      | `Boolean`                                      | `NOT NULL`, `Default=False`              | Indica se o usuário prefere a rota mais longa. |
 
+### Tabela: historico_pesquisa.
+Armazena todo o historico de pesquisa de um determinado usuário.
+### Relacionamentos:
+`usuario_id`: Chave estrangeira que vincula o histórico à tabela `usuario`.
+`pesquisa_id`: Chave estrangeira que vincula o histórico à tabela `pesquisa`´. Quando a pesquisa é excluída, o histórico relacionado também é excluído devido à restrição `ON DELETE CASCADE`.
+
+| **Coluna**                             | **Tipo de Dado**                                | **Restrições**                           | **Descrição** |
+|----------------------------------------|------------------------------------------------|----------------------------------------|---------------|
+| `id`                                   | `Integer`                                      | `PK`, `AutoIncrement`                   | Identificador único do histórico de pesquisa. |
+| `usuario_id`                           | `Integer`                                      | `FK(usuario.id)`, `NOT NULL`            | Referência ao usuário que realizou a pesquisa. |
+| `pesquisa_id`                          | `Integer`                                      | `FK(pesquisa.id)`, `NOT NULL`, `ON DELETE CASCADE` | Referência à pesquisa realizada. Caso a pesquisa seja excluída, o histórico relacionado será automaticamente excluído. |
+| `data_pesquisa`                        | `DateTime`                                     | `Default=datetime.utcnow`, `NOT NULL`    | Data e hora em que a pesquisa foi realizada. |
+| `vezes_pesquisada`                     | `Integer`                                      | `NOT NULL`, `Default=1`                  | Número de vezes que a pesquisa foi realizada. |
+
+### Tabela: resultado_pesquisa.
+Armazena os resultados de todas as pesquisas feita por um determinado usuário.
+### Relacionamento:
+`pesquisa_id`: Chave estrangeira que vincula o resultado à pesquisa na tabela `pesquisa`.
+| **Coluna**                             | **Tipo de Dado**                                | **Restrições**                           | **Descrição** |
+|----------------------------------------|------------------------------------------------|----------------------------------------|---------------|
+| `id`                                   | `Integer`                                      | `PK`, `AutoIncrement`                   | Identificador único do resultado da pesquisa. |
+| `pesquisa_id`                          | `Integer`                                      | `FK(pesquisa.id)`, `NOT NULL`           | Referência à pesquisa associada. |
+| `rota`                                 | `String(300)`                                  | `NOT NULL`                              | JSON contendo detalhes da rota (ex: pontos de passagem, nome das vias, etc.). |
+| `distancia`                            | `Float`                                        | `NOT NULL`                              | Distância total da rota em quilômetros. |
+| `duracao`                              | `Integer`                                      | `NOT NULL`                              | Tempo estimado para percorrer a rota, em minutos. |
+| `criado_em`                            | `DateTime`                                     | `Default=datetime.utcnow`, `NOT NULL`    | Data e hora em que o resultado foi armazenado. |
+
+
+
