@@ -26,6 +26,9 @@ def pesquisar_rota():
     destino=dados.get('destino')
     if not origem or not destino:
         return jsonify({'erro':'Origem e Destino são obrigatorios!'}),400
+    #verificar se origem e destino estão no formato correto
+    if not isinstance(origem,str) or not isinstance(destino,str):
+        return jsonify({'erro': "Origem e Destino deve ser string"}),400
     
     url=f"https://maps.googleapis.com/maps/api/directions/json?origin={origem}&destination={destino}&key={API_KEY}"
     try:
@@ -60,20 +63,47 @@ def filtros():
         return jsonify({'erro':'API_KEY não encontrada!'}),500
     
     dados=request.get_json() #obter os dados json enviado na requisição
+    
 
     if not dados:
         return jsonify({'erro': 'Nenhum filtro aplicado!'}), 400
-    #recebendo o modo de transporte
+    
+    # Lista de modos de transporte aceitos pela API
+    modos_permitidos = ["driving", "walking", "bicycling", "transit"]
+
     origem = dados.get("origem")
     destino = dados.get("destino")
-    modo_transporte=dados.get('modo_transporte', 'driving')
-    #recebendo os filtros com booleanos
-    evitar_rodovias=dados.get('evitar_rodovias', False)
-    evitar_transito_pesado=dados.get('evitar_transito',False)
-    evitar_pedágios=dados.get('evitar_transito', False)
-    evitar_estradas_nao_pavimentadas=dados.get('evitar_estradas_nao_pavimentadas', False)
-    rota_mais_curta=dados.get('rota_mais_curta', False)
-    rota_mais_longa=dados.get('rota_mais_longa', False)
+    if not origem or not destino:
+        return jsonify({'erro':'Os campos origem e destino são obrigatórios.'}),400
+    
+    
+    modo_transporte=dados.get('modo_transporte', 'driving').lower() #converter para minuscula
+    #validar o modo de transporte
+    if modo_transporte not in modos_permitidos:
+        return jsonify({'erro':f'Modo e transporte  inválido! Escolha entre {modos_permitidos}'}),400
+    
+
+    # Validações dos valores booleanos, e extração de dados
+    campos_boleanos=[
+        ("evitar_rodovias", dados.get("evitar_rodovias", False)),
+        ("evitar_transito_pesado",dados.get("evitar_transito_pesado", False)),
+        ("evitar_pedagio",dados.get("evitar_pedagios", False)),
+        ("evitar_estradas_nao_pavimentadas",dados.get("evitar_estradas_nao_pavimentadas",False)),
+        ("rota_mais_curta",dados.get("rota_mais_curta",False)),
+        ("rota_mais_longa",dados.get("rota_mais_longa",False))
+    ]
+    # Validação
+    for nome, valor in campos_boleanos:
+        if not isinstance (valor,bool):
+            return jsonify({"erro":"Valores invalidos"}),400
+    #Atribuições das variaveis
+    valores=dict(campos_boleanos)
+    evitar_rodovias = dict(campos_boleanos)["evitar_rodovias"]
+    evitar_transito_pesado = dict(campos_boleanos)["evitar_transito_pesado"]
+    evitar_pedagio = dict(campos_boleanos)["evitar_pedagio"]
+    evitar_estradas_nao_pavimentadas = dict(campos_boleanos)["evitar_estradas_nao_pavimentadas"]
+    rota_mais_curta = dict(campos_boleanos)["rota_mais_curta"]
+    rota_mais_longa = dict(campos_boleanos)["rota_mais_longa"]
 
     #criando parâmentros da API de mapas
     parametros={
@@ -84,7 +114,7 @@ def filtros():
         parametros['avoid'].append('highways')
     if evitar_transito_pesado:
         parametros['avoid'].append('traffic')
-    if evitar_pedágios:
+    if evitar_pedagio:
         parametros['avoid'].append('tolls')
     if evitar_estradas_nao_pavimentadas:
         parametros['avoid'].append('unpaved')

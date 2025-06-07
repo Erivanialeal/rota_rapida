@@ -5,11 +5,9 @@
   Este programa permite o usuário traçar rotas entre dois locais. Levando
 em consideração preferência de rotas e trânsito.
 
-# Funcionalidaes.
-##### Definir local de partida.
-##### Definir destino.
-##### Escolher prefêrencias de rotas.
-Evitar pedágio
+# Tab.
+### Usuario.
+Armazena as pesquisas realizadas pelo usuarios no sistema
 Evitar estradas não pavimentadas
 Evitar trânsito
 Rota mais curta
