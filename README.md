@@ -5,6 +5,7 @@
   Este programa permite o usuário traçar rotas entre dois locais. Levando
 em consideração preferência de rotas e trânsito.
 
+<<<<<<< HEAD
 # 📌 Banco de Dados - MySQL.
 ### O banco de dados utilizado no projeto é MySQL, responsável por armazenar as informações das pesquisas de rotas dos usuários..
 #### 📁 Tabelas do Banco de Dados.

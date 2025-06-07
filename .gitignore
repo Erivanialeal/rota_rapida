@@ -1,3 +1,4 @@
 .env
 __pycache__
 /rotas/
+rota_rapida/__pycache__
